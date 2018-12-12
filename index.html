@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Im-gautam</title>
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <table id="mainTable" class="table table-bordered">
+
+            <tr class="bg-teal">
+                <th>Item</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" id="item" name="item">
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="unit" name="unit">
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="price" name="price">
+                </td>
+                <td>
+                    <a href="javascript:addDetailList(0);" class="btn btn-primary btn-xs">Add Detail List</a>
+                </td>
+            </tr>
+            <tr id="itemDescTr0" class="hide">
+                <td colspan="2">
+                    <table class="table table-bordered">
+                        <thead></thead>
+                        <tr class="bg-gray">
+                            <th>Full Description</th>
+                            <th>Model</th>
+                        </tr>
+                        </thead>
+                        <tbody id="itemDescTbody0">
+                            <tr>
+                                <td>
+                                    <textarea name="full_desc" id="full_desc" cols="25" rows="2"></textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="model" name="model">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="javascript:addItemDesc(0);" class="btn btn-primary btn-sm">Add</a>
+                                    <a href="javascript:removeItemDesc(0);" class="btn btn-primary btn-sm">remove</a>
+                                    <input type="hidden" id="addCount0" name="addCount0" value="">
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+            <input type="hidden" class="form-control" id="showHideCountItem0" name="showHideCountItem0" value="">
+
+        </table>
+        <div class="pull-right">
+            <a href="javascript:add();" class="btn btn-primary btn-sm">Add</a>
+            <a href="javascript:remove();" class="btn btn-primary btn-sm">remove</a>
+            <input type="hidden" class="form-control" id="count" name="count" value="1">
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    function addDetailList(j) {
+        var countShowHide = $("#showHideCountItem" + j).val();
+        if (countShowHide == "") {
+            $("#itemDescTr" + j).removeClass('hide');
+            $("#showHideCountItem" + j).val(1);
+        } else {
+            $("#itemDescTr" + j).addClass('hide');
+            $("#showHideCountItem" + j).val('');
+        }
+
+    }
+
+    function add() {
+        var i = parseInt($("#count").val());
+        var str = '';
+
+        str += '<tr class="bg-teal">';
+        str += '<th>Item</th>';
+        str += '<th>Unit</th>';
+        str += '<th>Price</th>';
+        str += '<th>Action</th>';
+        str += '</tr>';
+        str += '<tr>';
+        str += '<td>';
+        str += '<input type="text" class="form-control" id="item" name="item">';
+        str += '</td>';
+        str += '<td>';
+        str += '<input type="text" class="form-control" id="unit" name="unit">';
+        str += '</td>';
+        str += '<td>';
+        str += '<input type="text" class="form-control" id="price" name="price">';
+        str += '</td>';
+        str += '<td>';
+        str += '<a href="javascript:addDetailList(' + i + ');" class="btn btn-primary btn-xs">Add Detail List</a>';
+        str += '</td>';
+        str += '</tr>';
+        str += '<tr id="itemDescTr' + i + '" class="hide">';
+        str += '<td colspan="2">';
+        str += '<table class="table table-bordered">';
+        str += '<thead></thead>';
+        str += '<tr class="bg-gray">';
+        str += '<th>Full Description</th>';
+        str += '<th>Model</th>';
+        str += '</tr>';
+        str += '</thead>';
+        str += '<tbody id="itemDescTbody' + i + '">';
+        str += '<tr>';
+        str += '<td>';
+        str += '<textarea name="full_desc" id="full_desc" cols="25" rows="2"></textarea>';
+        str += '</td>';
+        str += '<td>';
+        str += '<input type="text" class="form-control" id="model" name="model">';
+        str += '</td>';
+        str += ' </tr>';
+        str += '</tbody>';
+        str += '<tfoot>';
+        str += '<tr>';
+        str += '<td colspan="2">';
+        str += '<a href="javascript:addItemDesc(' + i + ');" class="btn btn-primary btn-sm">Add</a>';
+        str += '<a href="javascript:removeItemDesc(' + i + ');" class="btn btn-primary btn-sm">remove</a>';
+        str += '<input type="hidden" id="addCount' + i + '" name="addCount' + i + '" value="">';
+        str += '</td>';
+        str += '</tr>';
+
+        str += '</tfoot>';
+        str += '</table>';
+        str += '</td>';
+        str += '</tr>';
+        str += '<input type="hidden" class="form-control" id="showHideCountItem' + i + '" name="showHideCountItem' + i + '" value="">';
+        $("#mainTable").append(str);
+        i++;
+        $("#count").val(i);
+    }
+    $(document).ready(function () {
+        function () {
+            var j = parseInt($("#count").val());
+            alert("jj" + j);
+            if (j > 1) {
+                alert("innn")
+                $("#mainTable tr:last").remove();
+                $("#mainTable tr:last").remove();
+                $("#mainTable tr:last").remove();
+                $("#mainTable tr:last").remove();
+                var k = parseInt($("#count").val()) - 1;
+                $("#count").val(k);
+            }
+        }
+    });
+
+
+    function addItemDesc(k) {
+        var i = parseInt($('#addCount' + k).val());
+        var str = '';
+        str += '<tr>';
+        str += '<td>';
+        str += '<textarea name="full_desc" id="full_desc" cols="25" rows="2"></textarea>';
+        str += '</td>';
+        str += '<td>';
+        str += '<input type="text" class="form-control" id="model" name="model">';
+        str += '</td>';
+        str += '</tr>';
+        $("#itemDescTbody" + k).append(str);
+        i++;
+        $("#addCount" + k).val(i);
+    }
+
+</script>
